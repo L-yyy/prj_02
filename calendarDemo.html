@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绑定class属性实现日历效果</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+    body {
+        text-align: center;
+    }
+    
+    .date-wrap {
+        width: 510px;
+        border: 2px solid #4e6ef2;
+        padding: 15px 0;
+        border-radius: 16px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: auto;
+    }
+    
+    .date-wrap>div {
+        width: 60px;
+        height: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 6px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        margin: 2px;
+    }
+    /*同学们可以查一下hover的意思 */
+    
+    .date-wrap>div:hover {
+        border: 2px solid #BDBFC8;
+    }
+    
+    .date-wrap>div.head {
+        font-weight: bold;
+        height: 40px;
+    }
+    
+    .date-wrap>div div:first-child {
+        font-size: 18px;
+    }
+    
+    .date-wrap>div div:last-child {
+        font-size: 12px;
+    }
+    /* 定义绑定的类样式 ，notCurMonth：不是当前月，curDay：当前日*/
+    
+    .date-wrap>div.notCurMonth {
+        opacity: 0.4;
+    }
+    
+    .date-wrap>div.curDay {
+        border: 2px solid #4E6EF2;
+    }
+</style>
+
+<body>
+    <h2>2022年10月</h2>
+    <div class="date-wrap">
+        <div class="head">一</div>
+        <div class="head">二</div>
+        <div class="head">三</div>
+        <div class="head">四</div>
+        <div class="head">五</div>
+        <div class="head">六</div>
+        <div class="head">日</div>
+        <!-- 日期 -->
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,9,26'), curDay: isCurDay('2022,9,26')}">
+            <div>26</div>
+            <div>九月</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,9,27'), curDay: isCurDay('2022,9,27')}">
+            <div>27</div>
+            <div>初二</div>
+        </div>
+        <div v-bind:class="{notCurMonth:isNotCurMonth('2022,9,28'), curDay:isCurDay('2022,9,28')}">
+            <div>28</div>
+            <div>初三</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,9,29'), curDay: isCurDay('2022,9,29')}">
+            <div>29</div>
+            <div>初四</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,9,30'), curDay: isCurDay('2022,9,30')}">
+            <div>30</div>
+            <div>初五</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,1'), curDay: isCurDay('2022,10,1')}">
+            <div>1</div>
+            <div>初六</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,2'), curDay: isCurDay('2022,10,2')}">
+            <div>2</div>
+            <div>初七</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,3'), curDay: isCurDay('2022,10,3')}">
+            <div>3</div>
+            <div>初八</div>
+        </div>
+
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,4'), curDay: isCurDay('2022,10,4')}">
+            <div>4</div>
+            <div>重阳节</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,5'), curDay: isCurDay('2022,10,5')}">
+            <div>5</div>
+            <div>初十</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,6'), curDay: isCurDay('2022,10,6')}">
+            <div>6</div>
+            <div>十一</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,7'), curDay: isCurDay('2022,10,7')}">
+            <div>7</div>
+            <div>Birthday!!!</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,8'), curDay: isCurDay('2022,10,8')}">
+            <div>8</div>
+            <div>寒霜</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,9'), curDay: isCurDay('2022,10,9')}">
+            <div>9</div>
+            <div>十四</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,10'), curDay: isCurDay('2022,10,10')}">
+            <div>10</div>
+            <div>十五</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,11'), curDay: isCurDay('2022,10,11')}">
+            <div>11</div>
+            <div>十六</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,12'), curDay: isCurDay('2022,10,12')}">
+            <div>12</div>
+            <div>十七</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,13'), curDay: isCurDay('2022,10,13')}">
+            <div>13</div>
+            <div>十八</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,14'), curDay: isCurDay('2022,10,14')}">
+            <div>14</div>
+            <div>十九</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,15'), curDay: isCurDay('2022,10,15')}">
+            <div>15</div>
+            <div>二十</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,16'), curDay: isCurDay('2022,10,16')}">
+            <div>16</div>
+            <div>甘一</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,17'), curDay: isCurDay('2022,10,17')}">
+            <div>17</div>
+            <div>甘二</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,18'), curDay: isCurDay('2022,10,18')}">
+            <div>18</div>
+            <div>甘三</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,19'), curDay: isCurDay('2022,10,19')}">
+            <div>19</div>
+            <div>甘四</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,20'), curDay: isCurDay('2022,10,20')}">
+            <div>20</div>
+            <div>甘五</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,21'), curDay: isCurDay('2022,10,21')}">
+            <div>21</div>
+            <div>甘六</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,22'), curDay: isCurDay('2022,10,22')}">
+            <div>22</div>
+            <div>甘七</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,23'), curDay: isCurDay('2022,10,23')}">
+            <div>23</div>
+            <div>霜降</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,24'), curDay: isCurDay('2022,10,24')}">
+            <div>24</div>
+            <div>甘九</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,25'), curDay: isCurDay('2022,10,25')}">
+            <div>25</div>
+            <div>十月</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,26'), curDay: isCurDay('2022,10,26')}">
+            <div>26</div>
+            <div>初二</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,27'), curDay: isCurDay('2022,10,27')}">
+            <div>27</div>
+            <div>初三</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,28'), curDay: isCurDay('2022,10,28')}">
+            <div>28</div>
+            <div>初四</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,29'), curDay: isCurDay('2022,10,29')}">
+            <div>29</div>
+            <div>初五</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,30'), curDay: isCurDay('2022,10,30')}">
+            <div>30</div>
+            <div>初六</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,10,31'), curDay: isCurDay('2022,10,31')}">
+            <div>31</div>
+            <div>万圣夜</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,11,1'), curDay: isCurDay('2022,11,1')}">
+            <div>1</div>
+            <div>初八</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,11,2'), curDay: isCurDay('2022,11,2')}">
+            <div>2</div>
+            <div>初九</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,11,3'), curDay: isCurDay('2022,11,3')}">
+            <div>3</div>
+            <div>初十</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,11,4'), curDay: isCurDay('2022,11,4')}">
+            <div>4</div>
+            <div>十一</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,11,5'), curDay: isCurDay('2022,11,5')}">
+            <div>5</div>
+            <div>十二</div>
+        </div>
+        <div v-bind:class="{notCurMonth: isNotCurMonth('2022,11,6'), curDay: isCurDay('2022,11,6')}">
+            <div>6</div>
+            <div>十三</div>
+        </div>
+
+        <script>
+            let user = {
+                nowDay: "2022,10,7",
+                nowMonth: 10,
+                year: 0,
+                month: 0,
+                day: 0,
+            };
+            var vm = new Vue({
+                el: '.date-wrap',
+                data: user,
+                methods: {
+                    isNotCurMonth(val) {
+                        let array = val.split(',');
+                        this.year = array[0],
+                            this.month = array[1],
+                            this.data = array[2]
+                        if (this.month == this.nowMonth)
+                            return false
+                        else
+                            return true
+                    },
+
+                    isCurDay(val) {
+                        if (val == this.nowDay)
+                            return true
+                        else
+                            return false
+                    }
+                }
+            })
+        </script>
+</body>
+
+</html>
